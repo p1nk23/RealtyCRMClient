@@ -1,0 +1,101 @@
+﻿<Window x:Class="RealtyCRMClient.CardDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Детали карточки" Height="800" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="24" Margin="10"/>
+
+        <!-- Основная информация -->
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <StackPanel>
+                <!-- Все поля -->
+                <TextBlock Text="Цена:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Price}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Ссылка на объявление:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Link}" Margin="0,0,0,10"/>
+
+                <TextBlock Text=" Адрес:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Address}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Количество комнат:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding NumberOfRooms}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Высота потолков:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding CeilingHeight}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Описание:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Description}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="О квартире:" FontWeight="Bold" FontSize="18"/>
+
+                <TextBlock Text="Общая площадь:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding TotalArea}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Жилая площадь:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding LivingArea}" Margin="0,0,0,10"/>
+                
+                <TextBlock Text="Площадь кухни:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding LivingArea}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Вид из окна:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding WindowView}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Ремонт:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Renovation}" Margin="0,0,0,10"/>
+                
+                <TextBlock Text="Туалет:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Bathroom}" Margin="0,0,0,10"/>
+                
+                <TextBlock Text="Балкон:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Balcony}" Margin="0,0,0,10"/>
+                
+                <TextBlock Text="Наличие газоснобжения:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding GasSupply}" Margin="0,0,0,10"/>
+
+
+                <TextBlock Text="О доме:" FontWeight="Bold" FontSize="18"/>
+
+                <TextBlock Text="Тип дома:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding HouseType}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Тип перекрытий:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding CeilingType}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Год постройки:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding ConstructionYear}" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Тип перекрытий:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding CeilingType}" Margin="0,0,0,10"/>
+
+
+
+                <!-- Добавьте остальные поля по аналогии -->
+                <!-- Форма добавления комментария -->
+                <TextBlock Text="Добавить комментарий:" FontWeight="Bold" Margin="0,20,0,0"/>
+                <TextBox x:Name="CommentTextBox" Margin="0,5,0,10"/>
+                <Button Content="Добавить комментарий" Click="AddComment_Click"/>
+                <!-- Комментарии -->
+                <TextBlock Text="Комментарии:" FontWeight="Bold" Margin="0,20,0,0"/>
+                <ListView ItemsSource="{Binding Comments}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Text}" Margin="0,0,0,5"/>
+                                <TextBlock Text="{Binding Time}" Foreground="Gray"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

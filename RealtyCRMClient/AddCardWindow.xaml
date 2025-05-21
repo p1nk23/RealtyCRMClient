@@ -1,0 +1,11 @@
+﻿<Window x:Class="RealtyCRMClient.AddCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Новая карточка" Height="300" Width="400">
+    <StackPanel>
+        <TextBox x:Name="TitleBox" Text="Название" />
+        <TextBox x:Name="AddressBox" Text="Адрес" />
+        <TextBox x:Name="PriceBox" Text="Цена" />
+        <Button Content="Сохранить" Click="SaveButton_Click" />
+    </StackPanel>
+</Window>
