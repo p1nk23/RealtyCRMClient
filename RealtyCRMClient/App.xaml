@@ -16,8 +16,8 @@
                 <Setter.Value>
                     <ControlTemplate>
                         <Border Background="{TemplateBinding Background}"
-                        BorderBrush="#E0E0E0"
-                        BorderThickness="0,0,0,1">
+                            BorderBrush="#E0E0E0"
+                            BorderThickness="0,0,0,1">
                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>

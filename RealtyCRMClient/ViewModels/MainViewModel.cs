@@ -26,8 +26,6 @@ namespace RealtyCRMClient.ViewModels
             await LoadCards();
         }
         //Фильтр
-
-
         public ICommand CreateCardCommand => new RelayCommand(OpenCreateCardWindow);
 
         private async Task OpenCreateCardWindow()
@@ -239,8 +237,5 @@ namespace RealtyCRMClient.ViewModels
                 MessageBox.Show($"Ошибка обновления статуса: {ex.Message}");
             }
         }
-
-
-
     }
 }
