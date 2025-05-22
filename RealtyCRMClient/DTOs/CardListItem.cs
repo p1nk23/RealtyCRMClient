@@ -4,26 +4,32 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
+        public string CeilingType { get; set; }
+        public string WindowView { get; set; }
+        public string Bathroom { get; set; }
+        public string Balcony { get; set; }
+        public string Address { get; set; }
+        public string Price { get; set; }
+        public string TotalArea { get; set; }
+        public string Parking { get; set; }
+        public string Heating { get; set; }
+        public string GasSupply { get; set; }
+        public long? Personal_id { get; set; }
         public int? Status { get; set; }
-
-        // Конвертируем статус в текст
         public string StatusText
         {
             get
             {
-                switch (Status)
+                return Status switch
                 {
-                    case 0:
-                        return "Очередь";
-                    case 1:
-                        return "В работе";
-                    case 2:
-                        return "Ожидание ответа";
-                    case 3:
-                        return "Готово";
-                    default:
-                        return "Очередь";
-                }
+                    0 => "Очередь",
+                    1 => "В работе",
+                    2 => "Ожидание ответа",
+                    3 => "Готово",
+                    4 => "Предпочтения клиента",
+                    _ => "Очередь"
+                };
             }
         }
     }

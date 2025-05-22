@@ -16,63 +16,63 @@
             <StackPanel>
                 <!-- Все поля -->
                 <TextBlock Text="Цена:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Price}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Price}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Ссылка на объявление:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Link}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Link}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text=" Адрес:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Address}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Address}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Количество комнат:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding NumberOfRooms}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding NumberOfRooms}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Высота потолков:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding CeilingHeight}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding CeilingHeight}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Описание:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Description}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="О квартире:" FontWeight="Bold" FontSize="18"/>
 
                 <TextBlock Text="Общая площадь:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding TotalArea}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding TotalArea}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Жилая площадь:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding LivingArea}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding LivingArea}" TextWrapping="Wrap" Margin="0,0,0,10"/>
                 
                 <TextBlock Text="Площадь кухни:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding LivingArea}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding LivingArea}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Вид из окна:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding WindowView}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding WindowView}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Ремонт:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Renovation}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Renovation}" TextWrapping="Wrap" Margin="0,0,0,10"/>
                 
                 <TextBlock Text="Туалет:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Bathroom}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Bathroom}" TextWrapping="Wrap" Margin="0,0,0,10"/>
                 
                 <TextBlock Text="Балкон:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Balcony}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Balcony}" TextWrapping="Wrap" Margin="0,0,0,10"/>
                 
                 <TextBlock Text="Наличие газоснобжения:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding GasSupply}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding GasSupply}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
 
                 <TextBlock Text="О доме:" FontWeight="Bold" FontSize="18"/>
 
                 <TextBlock Text="Тип дома:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding HouseType}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding HouseType}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Тип перекрытий:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding CeilingType}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding CeilingType}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Год постройки:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding ConstructionYear}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding ConstructionYear}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Тип перекрытий:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding CeilingType}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding CeilingType}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
 
 

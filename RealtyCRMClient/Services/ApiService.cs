@@ -4,6 +4,7 @@ using System.Windows;
 using System.Text.Json;
 using RealtyCRMClient.DTOs;
 using RealtyCRM.DTOs;
+using RealtyCRMClient.Models;
 
 public class ApiService
 {
@@ -13,6 +14,34 @@ public class ApiService
     public ApiService()
     {
         _client = new HttpClient();
+    }
+
+    public async Task<CardObjectRieltyDto> GetCardByClientIdAsync(long personalId)
+    {
+        try
+        {
+            var response = await _client.GetAsync($"{BaseUrl}CardObjectRielty?Personal_id={personalId}");
+            response.EnsureSuccessStatusCode();
+            var cards = await response.Content.ReadFromJsonAsync<List<CardObjectRieltyDto>>();
+            return cards.FirstOrDefault();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public async Task<List<ClientDto>> GetAllClientsAsync()
+    {
+        var response = await _client.GetAsync($"{BaseUrl}Client");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<ClientDto>>();
+    }
+    public async Task<List<PersonalDto>> GetAllPersonalsAsync()
+    {
+        var response = await _client.GetAsync($"{BaseUrl}Personal");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<PersonalDto>>();
     }
 
     // Получить все карточки недвижимости 
@@ -27,7 +56,18 @@ public class ApiService
             {
                 Id = c.Id,
                 Title = c.Title,
-                Status = c.Status
+                Status = c.Status,
+                Address = c.Address,
+                Description = c.Description,
+                CeilingType = c.CeilingType,
+                WindowView = c.WindowView,
+                Bathroom = c.Bathroom,
+                Balcony = c.Balcony,
+                Price = c.Price,
+                TotalArea = c.TotalArea,
+                Parking = c.Parking,
+                Heating = c.Heating,
+                GasSupply = c.GasSupply
             }).ToList();
         }
         catch (Exception ex)

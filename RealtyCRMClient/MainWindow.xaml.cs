@@ -1,4 +1,5 @@
 ﻿using RealtyCRM.DTOs;
+using RealtyCRMClient.DTOs;
 using RealtyCRMClient.ViewModels;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -20,11 +21,43 @@ namespace RealtyCRMClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly PersonalDto _currentUser;
+
+        public MainWindow(PersonalDto user)
+        {
+            InitializeComponent();
+            DataContext = new MainViewModel();//удалить если что
+            _currentUser = user;
+            Title = $"CRM Недвижимость - {user.Name}";
+        }
+
         private object _draggedItem;
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void ApplyFilters(List<CardObjectRieltyDto> filteredCards)
+        {
+            // Перезаписываем текущие данные в MainViewModel
+            if (DataContext is MainViewModel viewModel)
+            {
+                // Преобразуем данные в ObservableCollection
+                var cards = filteredCards.Select(c => new CardListItem
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Status = c.Status,
+                    Address = c.Address
+                }).ToList();
+
+                // Фильтрация по статусам
+                viewModel.QueueItems = new ObservableCollection<CardListItem>(cards.Where(c => c.Status == 0 || c.Status == null));
+                viewModel.InWorkItems = new ObservableCollection<CardListItem>(cards.Where(c => c.Status == 1));
+                viewModel.WaitingItems = new ObservableCollection<CardListItem>(cards.Where(c => c.Status == 2));
+                viewModel.DoneItems = new ObservableCollection<CardListItem>(cards.Where(c => c.Status == 3));
+            }
         }
 
         private void Card_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
