@@ -1,0 +1,22 @@
+﻿<Window x:Class="RealtyCRMClient.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вход в систему" Height="300" Width="400">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="Логин:" FontWeight="Bold"/>
+            <TextBox x:Name="LoginBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Пароль:" FontWeight="Bold"/>
+            <PasswordBox x:Name="PasswordBox" Margin="0,0,0,10"/>
+
+            <Button Content="Войти" 
+                    Click="LoginButton_Click" 
+                    Width="100" Height="40" HorizontalAlignment="Left"/>
+
+            <Button Content="Зарегистрироваться" 
+                    Click="OpenRegisterWindow_Click" 
+                    Width="120" Height="40" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

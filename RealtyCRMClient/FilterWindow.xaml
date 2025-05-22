@@ -1,0 +1,65 @@
+﻿<Window x:Class="RealtyCRMClient.FilterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Фильтрация объектов" Height="600" Width="800">
+    <Grid Margin="10">
+        <StackPanel>
+            <!-- Выбор клиента -->
+            <TextBlock Text="Выберите клиента:" FontWeight="Bold"/>
+            <ComboBox x:Name="ClientComboBox" 
+                      ItemsSource="{Binding Clients}" 
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      SelectedItem="{Binding SelectedClient}"
+                      Margin="0,0,0,10"/>
+
+            <!-- Поля фильтрации -->
+            <TextBlock Text="Фильтрация по объектам недвижимости" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <!-- Название -->
+            <TextBlock Text="Название:" FontWeight="Bold"/>
+            <TextBox x:Name="TitleFilter" Text="{Binding Title}" Margin="0,0,0,10"/>
+
+            <!-- Адрес -->
+            <TextBlock Text="Адрес:" FontWeight="Bold"/>
+            <TextBox x:Name="AddressFilter" Text="{Binding Address}" Margin="0,0,0,10"/>
+
+            <!-- Тип перекрытий -->
+            <TextBlock Text="Тип перекрытий:" FontWeight="Bold"/>
+            <TextBox x:Name="CeilingTypeFilter" Text="{Binding CeilingType}" Margin="0,0,0,10"/>
+
+            <!-- Вид из окон -->
+            <TextBlock Text="Вид из окон:" FontWeight="Bold"/>
+            <TextBox x:Name="WindowViewFilter" Text="{Binding WindowView}" Margin="0,0,0,10"/>
+
+            <!-- Санузел -->
+            <TextBlock Text="Санузел:" FontWeight="Bold"/>
+            <TextBox x:Name="BathroomFilter" Text="{Binding Bathroom}" Margin="0,0,0,10"/>
+
+            <!-- Балкон -->
+            <TextBlock Text="Балкон:" FontWeight="Bold"/>
+            <TextBox x:Name="BalconyFilter" Text="{Binding Balcony}" Margin="0,0,0,10"/>
+
+            <!-- Общая площадь -->
+            <TextBlock Text="Общая площадь:" FontWeight="Bold"/>
+            <TextBox x:Name="TotalAreaFilter" Text="{Binding TotalArea}" Margin="0,0,0,10"/>
+
+            <!-- Парковка -->
+            <TextBlock Text="Парковка:" FontWeight="Bold"/>
+            <TextBox x:Name="ParkingFilter" Text="{Binding Parking}" Margin="0,0,0,10"/>
+
+            <!-- Отопление -->
+            <TextBlock Text="Отопление:" FontWeight="Bold"/>
+            <TextBox x:Name="HeatingFilter" Text="{Binding Heating}" Margin="0,0,0,10"/>
+
+            <!-- Газоснабжение -->
+            <TextBlock Text="Газоснабжение:" FontWeight="Bold"/>
+            <TextBox x:Name="GasSupplyFilter" Text="{Binding GasSupply}" Margin="0,0,0,10"/>
+
+            <!-- Кнопка применения фильтра -->
+            <Button Content="Применить фильтр" 
+                    Command="{Binding ApplyFilterCommand}" 
+                    Width="120" Height="40" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -5,11 +5,13 @@ using System.Windows;
 using System.Windows.Input;
 using RealtyCRM.DTOs;
 using RealtyCRMClient.DTOs;
+using RealtyCRMClient.Models;
 
 namespace RealtyCRMClient.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+
         private readonly ApiService _apiService;
         private ObservableCollection<CardListItem> _allCards = new();
         private ObservableCollection<CardListItem> _queueItems = new();
@@ -21,9 +23,19 @@ namespace RealtyCRMClient.ViewModels
 
         private async Task RefreshData()
         {
-            await LoadCards(); // Теперь это работает
+            await LoadCards();
         }
+        //Фильтр
 
+
+        public ICommand CreateCardCommand => new RelayCommand(OpenCreateCardWindow);
+
+        private async Task OpenCreateCardWindow()
+        {
+            var addWindow = new AddCardWindow();
+            addWindow.ShowDialog(); // Это синхронный вызов, но он совместим
+            await Task.CompletedTask; // Позволяет методу возвращать Task
+        }
 
         public ObservableCollection<CardListItem> AllCards
         {
@@ -120,7 +132,7 @@ namespace RealtyCRMClient.ViewModels
             set
             {
                 _selectedCards = value;
-                OnPropertyChanged();
+                OnPropertyChanged(); // Должно вызываться
             }
         }
 
@@ -138,8 +150,48 @@ namespace RealtyCRMClient.ViewModels
             }
         }
 
+        public ICommand OpenFilterCommand => new RelayCommand(OpenFilterWindow);
 
+        private async Task OpenFilterWindow()
+        {
+            //MessageBox.Show("Открытие окна фильтрации");
+            var filterWindow = new FilterWindow();
+            filterWindow.Show(); // Или ShowDialog(), в зависимости от логики
+            await Task.CompletedTask;
+        }
 
+        private CardFilter _currentFilter = new();
+
+        public void ApplyCardFilter(CardFilter filter, int? cardObjId = null)
+        {
+            var filteredCards = AllCards.Where(c =>
+            {
+                // Если есть ID клиента — ищем только по нему
+                if (cardObjId.HasValue)
+                {
+                    return c.Id == cardObjId.Value;
+                }
+
+                // Иначе — ищем по другим полям
+                return
+                    (string.IsNullOrEmpty(filter.Title) || c.Title?.Contains(filter.Title, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.Address) || c.Address?.Contains(filter.Address, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.CeilingType) || c.CeilingType?.Contains(filter.CeilingType, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.WindowView) || c.WindowView?.Contains(filter.WindowView, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.Bathroom) || c.Bathroom?.Contains(filter.Bathroom, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.Balcony) || c.Balcony?.Contains(filter.Balcony, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.TotalArea) || c.TotalArea?.Contains(filter.TotalArea, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.Parking) || c.Parking?.Contains(filter.Parking, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.Heating) || c.Heating?.Contains(filter.Heating, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.GasSupply) || c.GasSupply?.Contains(filter.GasSupply, StringComparison.OrdinalIgnoreCase) == true);
+            }).ToList();
+
+            // Обновите отображаемые данные
+            QueueItems = new ObservableCollection<CardListItem>(filteredCards.Where(c => c.Status == 0 || c.Status == null));
+            InWorkItems = new ObservableCollection<CardListItem>(filteredCards.Where(c => c.Status == 1));
+            WaitingItems = new ObservableCollection<CardListItem>(filteredCards.Where(c => c.Status == 2));
+            DoneItems = new ObservableCollection<CardListItem>(filteredCards.Where(c => c.Status == 3));
+        }
 
         public ICommand ShowQueueCommand => new RelayCommand(LoadQueue);
         public ICommand ShowInWorkCommand => new RelayCommand(LoadInWork);
