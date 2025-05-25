@@ -33,6 +33,13 @@ namespace RealtyCRMClient
             this.Close();
         }
 
+        private void OpenClients_Click(object sender, RoutedEventArgs e)
+        {
+            var clientsWindow = new ClientsWindow(CurrentUser); // Передаем пользователя
+            clientsWindow.Show();
+            this.Close();
+        }
+
         // Открыть Задачи (заглушка)
         private void OpenTasks_Click(object sender, RoutedEventArgs e)
         {

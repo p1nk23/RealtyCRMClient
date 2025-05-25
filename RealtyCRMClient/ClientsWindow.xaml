@@ -1,0 +1,49 @@
+﻿<Window x:Class="RealtyCRMClient.ClientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RealtyCRMClient.ViewModels"
+        Title="Клиенты" Height="600" Width="800">
+
+
+  <Grid Margin="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <!-- Верхняя панель с кнопками -->
+    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+      <Button Content="Создать"
+              Command="{Binding CreateClientCommand}"
+              Width="100" Height="40" Margin="0,0,10,0"/>
+
+      <Button Content="Фильтр"
+              Command="{Binding OpenFilterCommand}"
+              Width="100" Height="40" Margin="0,0,10,0"/>
+
+      <Button Content="Обновить"
+              Command="{Binding RefreshCommand}"
+              Width="100" Height="40" Margin="0,0,10,0"/>
+
+      <Button Content="Назад в меню"
+              Command="{Binding BackToMenuCommand}"
+              Width="120" Height="40"/>
+    </StackPanel>
+
+    <!-- Список клиентов -->
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+      <ItemsControl ItemsSource="{Binding Clients}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Border BorderBrush="LightBlue" BorderThickness="1"
+                    Margin="5" Padding="10"
+                    Background="#F9F9F9"
+                    PreviewMouseLeftButtonDown="Card_PreviewMouseLeftButtonDown">
+              <TextBlock Text="{Binding Name}" />
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </Grid>
+</Window>

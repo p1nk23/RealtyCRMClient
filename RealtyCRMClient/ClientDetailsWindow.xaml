@@ -1,0 +1,37 @@
+﻿<Window x:Class="RealtyCRMClient.ClientDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Детали клиента" Height="500" Width="600">
+    <Grid Margin="10">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Имя -->
+                <TextBlock Text="Имя:" FontWeight="Bold"/>
+                <TextBox x:Name="NameBox" Text="{Binding Name}" Margin="0,0,0,10"/>
+
+                <!-- Email -->
+                <TextBlock Text="Email:" FontWeight="Bold"/>
+                <TextBox x:Name="EmailBox" Text="{Binding Email}" Margin="0,0,0,10"/>
+
+                <!-- Телефон -->
+                <TextBlock Text="Телефон:" FontWeight="Bold"/>
+                <TextBox x:Name="NumberBox" Text="{Binding Number}" Margin="0,0,0,10"/>
+
+                <!-- Описание -->
+                <TextBlock Text="Описание:" FontWeight="Bold"/>
+                <TextBox x:Name="DescriptionBox" Text="{Binding Description}" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Margin="0,0,0,10"/>
+
+                <!-- Статус -->
+                <TextBlock Text="Статус:" FontWeight="Bold"/>
+                <ComboBox x:Name="StatusComboBox" SelectedIndex="{Binding Status}" Margin="0,0,0,10">
+                    <ComboBoxItem Content="Не активен" Tag="0"/>
+                    <ComboBoxItem Content="Активен" Tag="1"/>
+                    <ComboBoxItem Content="В архиве" Tag="2"/>
+                </ComboBox>
+
+                <!-- Кнопка "Сохранить" -->
+                <Button Content="Сохранить" Click="SaveButton_Click" Width="100" Height="40"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -11,5 +11,6 @@ namespace RealtyCRMClient.DTOs
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Number { get; set; }
+        public int? Status { get; set; }
     }
 }

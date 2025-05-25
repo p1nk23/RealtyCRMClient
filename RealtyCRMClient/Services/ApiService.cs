@@ -7,6 +7,8 @@ using RealtyCRM.DTOs;
 using RealtyCRM.Models;
 using RealtyCRMClient.Models;
 using CardObjectRieltyDto = RealtyCRMClient.DTOs.CardObjectRieltyDto;
+using Newtonsoft.Json;
+using System.Text;
 
 
 public class ApiService
@@ -33,6 +35,39 @@ public class ApiService
             return null;
         }
     }
+
+    //public async Task<List<ClientDto>> GetAllClientsAsync()
+    //{
+    //    var response = await _client.GetAsync($"{BaseUrl}Client");
+    //    response.EnsureSuccessStatusCode();
+    //    return await response.Content.ReadFromJsonAsync<List<ClientDto>>();
+    //}
+
+    public async Task<ClientDto> GetClientByIdAsync(long id)
+    {
+        var response = await _client.GetAsync($"{BaseUrl}Client/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<ClientDto>();
+    }
+
+    public async Task CreateClientAsync(CreateClientDto dto)
+    {
+        var json = JsonConvert.SerializeObject(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _client.PostAsync($"{BaseUrl}Client", content);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task UpdateClientAsync(long id, UpdateClientDto dto)
+    {
+        var json = JsonConvert.SerializeObject(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _client.PutAsync($"{BaseUrl}Client/{id}", content);
+        response.EnsureSuccessStatusCode();
+    }
+
 
 
     public async Task<List<ClientDto>> GetAllClientsAsync()

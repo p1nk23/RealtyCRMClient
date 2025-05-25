@@ -28,7 +28,7 @@
 
             <!-- Кнопка "Клиенты" Click="OpenClients_Click" -->
             <Button Content="Клиенты" 
-                     
+                    Click="OpenClients_Click" 
                     Width="200" Height="40" Margin="0,0,0,10"/>
 
             <!-- Кнопка "Документы" -->
