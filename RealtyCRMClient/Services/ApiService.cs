@@ -4,7 +4,10 @@ using System.Windows;
 using System.Text.Json;
 using RealtyCRMClient.DTOs;
 using RealtyCRM.DTOs;
+using RealtyCRM.Models;
 using RealtyCRMClient.Models;
+using CardObjectRieltyDto = RealtyCRMClient.DTOs.CardObjectRieltyDto;
+
 
 public class ApiService
 {
@@ -30,6 +33,7 @@ public class ApiService
             return null;
         }
     }
+
 
     public async Task<List<ClientDto>> GetAllClientsAsync()
     {

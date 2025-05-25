@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RealtyCRMClient.Pages
+namespace RealtyCRMClient
 {
     /// <summary>
-    /// Логика взаимодействия для DocumentsPage.xaml
+    /// Логика взаимодействия для TasksWindow.xaml
     /// </summary>
-    public partial class DocumentsPage : Page
+    public partial class TasksWindow : Window
     {
-        public DocumentsPage()
+        public TasksWindow()
         {
             InitializeComponent();
         }

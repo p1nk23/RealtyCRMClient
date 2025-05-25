@@ -48,12 +48,8 @@ namespace RealtyCRMClient
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<PersonalDto>();
-                //MessageBox.Show($"Добро пожаловать, {result.Name}!");
-
-                var mainWindow = new MainWindow();
-                //mainWindow.DataContext = new MainViewModel();
-                Application.Current.MainWindow = mainWindow;
-                mainWindow.Show();
+                var mainMenu = new MainMenuWindow(result); // Открываем главное меню
+                mainMenu.Show();
                 this.Close();
             }
             else

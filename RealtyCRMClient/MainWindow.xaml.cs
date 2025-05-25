@@ -33,9 +33,16 @@ namespace RealtyCRMClient
 
         private object _draggedItem;
 
-        public MainWindow()
+        //public MainWindow()
+        //{
+        //    InitializeComponent();
+        //}
+
+        private void OpenMainMenu_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            var mainMenu = new MainMenuWindow(_currentUser);
+            mainMenu.Show();
+            this.Close();
         }
 
         public void ApplyFilters(List<CardObjectRieltyDto> filteredCards)

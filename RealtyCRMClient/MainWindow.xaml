@@ -27,6 +27,12 @@
         
         <!-- Кнопки -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <Button Content="Главное меню" 
+            Click="OpenMainMenu_Click" 
+            Width="120" Height="40" 
+            HorizontalAlignment="Left" 
+            Margin="10"/>
+            
             <Button Content="Создать" 
             Command="{Binding CreateCardCommand}" 
             Width="100" Height="40" Margin="0,0,10,0"/>

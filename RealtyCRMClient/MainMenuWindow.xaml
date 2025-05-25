@@ -1,0 +1,43 @@
+﻿<Window x:Class="RealtyCRMClient.MainMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Главное меню" Height="400" Width="600">
+    <Grid Margin="20">
+        <TextBlock x:Name="UserNameText" 
+                   Text="{Binding CurrentUser.Name}" 
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Top" 
+                   Margin="0,0,20,0" 
+                   FontSize="16" 
+                   FontWeight="Bold"/>
+        <StackPanel>
+            <!-- Кнопка "Сменить пользователя" -->
+            <Button Content="Сменить пользователя" 
+                    Click="SwitchUser_Click" 
+                    Width="200" Height="40" Margin="0,0,0,10"/>
+
+            <!-- Кнопка "База объектов" -->
+            <Button Content="База объектов" 
+                    Click="OpenObjects_Click" 
+                    Width="200" Height="40" Margin="0,0,0,10"/>
+
+            <!-- Кнопка "Задачи" -->
+            <Button Content="Задачи" 
+                    Click="OpenTasks_Click" 
+                    Width="200" Height="40" Margin="0,0,0,10"/>
+
+            <!-- Кнопка "Клиенты" Click="OpenClients_Click" -->
+            <Button Content="Клиенты" 
+                     
+                    Width="200" Height="40" Margin="0,0,0,10"/>
+
+            <!-- Кнопка "Документы" -->
+            <Button Content="Документы" 
+                    Click="OpenDocuments_Click" 
+                    Width="200" Height="40"/>
+            <Button Content="Выход" 
+                    Click="ExitApplication_Click" 
+                    Width="200" Height="40" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
