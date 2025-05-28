@@ -43,6 +43,51 @@ public class ApiService
     //    return await response.Content.ReadFromJsonAsync<List<ClientDto>>();
     //}
 
+    //Задачи
+
+    public async Task<List<TaskObjectDto>> GetAllTasksAsync()
+    {
+        var response = await _client.GetAsync($"{BaseUrl}TaskObject");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<TaskObjectDto>>();
+    }
+
+    public async Task<TaskObjectDto> GetTaskByIdAsync(long id)
+    {
+        var response = await _client.GetAsync($"{BaseUrl}TaskObject/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<TaskObjectDto>();
+    }
+
+    public async Task UpdateTaskAsync(long id, TaskObjectDto dto)
+    {
+        var json = JsonConvert.SerializeObject(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _client.PutAsync($"{BaseUrl}TaskObject/{id}", content);
+        response.EnsureSuccessStatusCode();
+    }
+
+
+
+
+
+
+
+    public async Task CreateTaskAsync(CreateTaskObjectDto dto)
+    {
+        var json = JsonConvert.SerializeObject(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _client.PostAsync($"{BaseUrl}TaskObject", content);
+        response.EnsureSuccessStatusCode();
+    }
+
+    
+
+
+    //Клиенты
+
     public async Task<ClientDto> GetClientByIdAsync(long id)
     {
         var response = await _client.GetAsync($"{BaseUrl}Client/{id}");

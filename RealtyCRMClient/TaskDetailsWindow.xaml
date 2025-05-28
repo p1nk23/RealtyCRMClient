@@ -1,0 +1,49 @@
+﻿<Window x:Class="RealtyCRMClient.TaskDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Детали задачи" Height="600" Width="800">
+    <Grid Margin="10">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Заголовок -->
+                <TextBlock Text="Заголовок:" FontWeight="Bold"/>
+                <TextBox x:Name="TitleBox" Text="{Binding Title}" Margin="0,0,0,10"/>
+
+                <!-- Описание -->
+                <TextBlock Text="Описание:" FontWeight="Bold"/>
+                <TextBox x:Name="DescriptionBox" Text="{Binding Description}" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Margin="0,0,0,10"/>
+
+                <!-- Поле "Статус" -->
+                <TextBlock Text="Статус:" FontWeight="Bold"/>
+                <ComboBox x:Name="StatusComboBox" SelectedIndex="{Binding Status}" Margin="0,0,0,10">
+                    <ComboBoxItem Content="Очередь" Tag="0"/>
+                    <ComboBoxItem Content="В работе" Tag="1"/>
+                    <ComboBoxItem Content="Ожидание ответа" Tag="2"/>
+                    <ComboBoxItem Content="Готово" Tag="3"/>
+                </ComboBox>
+                
+                
+
+                <!-- Дата начала -->
+                <TextBlock Text="Дата начала:" FontWeight="Bold"/>
+                <DatePicker x:Name="StartDatePicker" SelectedDate="{Binding StartDate}" Margin="0,0,0,10"/>
+
+                <!-- Дата завершения -->
+                <TextBlock Text="Дата завершения:" FontWeight="Bold"/>
+                <DatePicker x:Name="EndDatePicker" SelectedDate="{Binding EndDate}" Margin="0,0,0,10"/>
+
+                <!-- Персонал -->
+                <TextBlock Text="Назначено персоналу:" FontWeight="Bold"/>
+                <ComboBox x:Name="PersonalComboBox" 
+          ItemsSource="{Binding Personals}" 
+          DisplayMemberPath="Name" 
+          SelectedValuePath="Id"
+          SelectedItem="{Binding SelectedPersonal}"
+          Margin="0,0,0,10"/>
+
+                <!-- Кнопка сохранения -->
+                <Button Content="Сохранить" Click="SaveButton_Click" Width="100" Height="40"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

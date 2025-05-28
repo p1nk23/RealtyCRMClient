@@ -16,6 +16,7 @@ namespace RealtyCRMClient
         }
 
 
+
         // Сменить пользователя
         private void SwitchUser_Click(object sender, RoutedEventArgs e)
         {
@@ -43,7 +44,9 @@ namespace RealtyCRMClient
         // Открыть Задачи (заглушка)
         private void OpenTasks_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Раздел 'Задачи' находится в разработке");
+            var tasksWindow = new TasksWindow(CurrentUser);
+            tasksWindow.Show();
+            this.Close();
         }
 
         // Открыть Документы (заглушка)
