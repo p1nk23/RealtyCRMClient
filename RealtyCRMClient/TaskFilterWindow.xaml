@@ -1,0 +1,27 @@
+﻿<Window x:Class="RealtyCRMClient.TaskFilterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Фильтр задач" Height="350" Width="400">
+    <Grid Margin="10">
+        <StackPanel>
+            <!-- Заголовок -->
+            <TextBlock Text="Заголовок:" FontWeight="Bold"/>
+            <TextBox x:Name="Title" Margin="0,0,0,10"/>
+
+            <!-- Описание -->
+            <TextBlock Text="Описание:" FontWeight="Bold"/>
+            <TextBox x:Name="Description" Margin="0,0,0,10"/>
+
+            <!-- Персонал -->
+            <TextBlock Text="Персонал:" FontWeight="Bold"/>
+            <ComboBox x:Name="AssignedToComboBox" Margin="0,0,0,10">
+                <!-- Сюда будут загружены сотрудники -->
+            </ComboBox>
+
+            <!-- Кнопка Применить -->
+            <Button Content="Применить фильтр" 
+                    Click="ApplyFilter_Click" 
+                    Width="120" Height="40"/>
+        </StackPanel>
+    </Grid>
+</Window>

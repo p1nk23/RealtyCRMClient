@@ -18,6 +18,7 @@ namespace RealtyCRMClient.ViewModels
     public class TasksViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
+        private ObservableCollection<TaskListItem> _allTasks = new();
 
         // Списки задач по статусу
         public ObservableCollection<TaskListItem> QueueItems { get; set; } = new();
@@ -113,10 +114,69 @@ namespace RealtyCRMClient.ViewModels
             }
         }
 
+        //Фильтр задач
+
+        public ICommand OpenFilterCommand => new RelayCommand(OpenFilterWindow);
+
+        private async Task OpenFilterWindow()
+        {
+            var filterWindow = new TaskFilterWindow();
+            if (filterWindow.ShowDialog() == true)
+            {
+               await ApplyTaskFilter(filterWindow.Filter);
+            }
+        }
+
+        public async Task ApplyTaskFilter(TaskFilter filter)
+        {
+            QueueItems.Clear();
+            InWorkItems.Clear();
+            WaitingItems.Clear();
+            DoneItems.Clear();
+
+            var tasks = await _apiService.GetAllTasksAsync();
+
+            var filtered = tasks.Where(t =>
+                (string.IsNullOrEmpty(filter.Title) || t.Title.Contains(filter.Title, StringComparison.OrdinalIgnoreCase)) &&
+                (string.IsNullOrEmpty(filter.Description) || t.Description.Contains(filter.Description, StringComparison.OrdinalIgnoreCase)) &&
+                (string.IsNullOrEmpty(filter.PersonalName) || t.Personal.Name.Contains(filter.PersonalName, StringComparison.OrdinalIgnoreCase))
+            ).ToList();
+
+            foreach (var task in filtered)
+            {
+                var item = new TaskListItem
+                {
+                    Id = task.Id,
+                    Title = task.Title,
+                    Description = task.Description,
+                    Status = int.TryParse(task.Status, out var status) ? (int?)status : null,
+                    PersonalName = task.Personal?.Name ?? "Не назначен"
+                };
+
+                switch (item.Status)
+                {
+                    case 0:
+                        QueueItems.Add(item);
+                        break;
+                    case 1:
+                        InWorkItems.Add(item);
+                        break;
+                    case 2:
+                        WaitingItems.Add(item);
+                        break;
+                    case 3:
+                        DoneItems.Add(item);
+                        break;
+                    default:
+                        QueueItems.Add(item); // По умолчанию — очередь
+                        break;
+                }
+            }
+        }
 
 
         // Команда обновления данных
-        
+
 
         private async Task RefreshData()
         {
@@ -130,6 +190,8 @@ namespace RealtyCRMClient.ViewModels
                await LoadTasks();
             }
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)

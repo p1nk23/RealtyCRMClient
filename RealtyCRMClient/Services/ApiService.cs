@@ -68,7 +68,12 @@ public class ApiService
         response.EnsureSuccessStatusCode();
     }
 
-
+    public async Task<PersonalDto> GetPersonalById(long id)
+    {
+        var response = await _client.GetAsync($"{BaseUrl}Personal/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<PersonalDto>();
+    }
 
 
 

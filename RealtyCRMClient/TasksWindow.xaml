@@ -31,6 +31,9 @@
         Width="120" Height="40"
         Margin="0,0,10,0"/>
 
+            <Button Content="Фильтр" 
+        Command="{Binding OpenFilterCommand}" 
+        Width="100" Height="40" Margin="0,0,10,0"/>
         </StackPanel>
 
         <!-- Основная область -->

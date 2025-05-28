@@ -93,6 +93,17 @@ namespace RealtyCRMClient
             }
         }
 
+
+        private void OpenFilterWindow()
+        {
+            var filterWindow = new TaskFilterWindow();
+            if (filterWindow.ShowDialog() == true)
+            {
+                var viewModel = DataContext as TasksViewModel;
+                viewModel.ApplyTaskFilter(filterWindow.Filter);
+            }
+        }
+
         // === Открытие деталей задачи по клику ===
         private void Card_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
