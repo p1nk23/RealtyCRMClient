@@ -35,6 +35,7 @@
             <Button Content="Документы" 
                     Click="OpenDocuments_Click" 
                     Width="200" Height="40"/>
+            
             <Button Content="Выход" 
                     Click="ExitApplication_Click" 
                     Width="200" Height="40" Margin="0,10,0,0"/>

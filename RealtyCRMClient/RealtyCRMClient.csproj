@@ -9,6 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\DejaVuSans.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\DejaVuSans.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="7.1.19" />
+    <PackageReference Include="itextsharp.pdfa" Version="5.5.13.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

@@ -36,15 +36,8 @@ public class ApiService
         }
     }
 
-    //public async Task<List<ClientDto>> GetAllClientsAsync()
-    //{
-    //    var response = await _client.GetAsync($"{BaseUrl}Client");
-    //    response.EnsureSuccessStatusCode();
-    //    return await response.Content.ReadFromJsonAsync<List<ClientDto>>();
-    //}
 
     //Задачи
-
     public async Task<List<TaskObjectDto>> GetAllTasksAsync()
     {
         var response = await _client.GetAsync($"{BaseUrl}TaskObject");
@@ -118,14 +111,14 @@ public class ApiService
         response.EnsureSuccessStatusCode();
     }
 
-
-
     public async Task<List<ClientDto>> GetAllClientsAsync()
     {
         var response = await _client.GetAsync($"{BaseUrl}Client");
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<List<ClientDto>>();
     }
+
+    //Персонал организации
     public async Task<List<PersonalDto>> GetAllPersonalsAsync()
     {
         var response = await _client.GetAsync($"{BaseUrl}Personal");
@@ -194,25 +187,39 @@ public class ApiService
         }
     }
 
+    // Получить все шаблоны документов
+    public async Task<List<DocumentTemplateDto>> GetAllTemplatesAsync()
+    {
+        var response = await _client.GetAsync($"{BaseUrl}DocumentTemplate");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<DocumentTemplateDto>>();
+    }
+
+    // Получить шаблон по ID
+    public async Task<DocumentTemplateDto> GetTemplateByIdAsync(int id)
+    {
+        var response = await _client.GetAsync($"{BaseUrl}DocumentTemplate/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<DocumentTemplateDto>();
+    }
 
 
 
-
-    // Создать новую карточку
+    // Создать новую карточку недвижимости
     public async Task CreateCardAsync(CardObjectRieltyDto card)
     {
         var response = await _client.PostAsJsonAsync($"{BaseUrl}CardObjectRielty", card);
         response.EnsureSuccessStatusCode();
     }
 
-    // Обновить карточку
+    // Обновить карточку недвижимости
     public async Task UpdateCardAsync(int id, CardObjectRieltyDto card)
     {
         var response = await _client.PutAsJsonAsync($"{BaseUrl}CardObjectRielty/{id}", card);
         response.EnsureSuccessStatusCode();
     }
 
-    // Удалить карточку
+    // Удалить карточку недвижимости
     public async Task DeleteCardAsync(int id)
     {
         var response = await _client.DeleteAsync($"{BaseUrl}CardObjectRielty/{id}");
