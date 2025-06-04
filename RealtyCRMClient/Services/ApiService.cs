@@ -37,6 +37,39 @@ public class ApiService
     }
 
 
+    // Контракты
+    public async Task<List<ContractDto>> GetAllContractsAsync()
+    {
+        var response = await _client.GetAsync($"{BaseUrl}Contract");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<ContractDto>>();
+    }
+
+    public async Task<ContractDto> GetContractByIdAsync(int id)
+    {
+        var response = await _client.GetAsync($"{BaseUrl}Contract/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<ContractDto>();
+    }
+
+    public async Task CreateContractAsync(ContractDto dto)
+    {
+        var json = JsonConvert.SerializeObject(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _client.PostAsync($"{BaseUrl}Contract", content);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task UpdateContractAsync(int id, ContractDto dto)
+    {
+        var json = JsonConvert.SerializeObject(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _client.PutAsync($"{BaseUrl}Contract/{id}", content);
+        response.EnsureSuccessStatusCode();
+    }
+
     //Задачи
     public async Task<List<TaskObjectDto>> GetAllTasksAsync()
     {

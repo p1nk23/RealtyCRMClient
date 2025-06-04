@@ -12,12 +12,12 @@ namespace RealtyCRMClient
         public static string ReplaceFields(string template, DocumentFields fields)
         {
             var result = template;
-
             // Основные поля
             result = result.Replace("{SellerName},", $"гр. РФ {fields.SellerName},")
                            //.Replace("(фамилия, имя отчество)", fields.SellerName)
                            //.Replace("(адрес регистрации)", fields.SellerAddress)
                            .Replace("{BuyerName},", $"гр. РФ {fields.BuyerName},")
+                           .Replace("{BuyerName}", $"{fields.BuyerName}")
                            //.Replace("(адрес регистрации) ", fields.BuyerAddress)
                            .Replace("{цена цифрами}", fields.PriceNumeric)
                            .Replace("{цена словами}", fields.PriceInWords)

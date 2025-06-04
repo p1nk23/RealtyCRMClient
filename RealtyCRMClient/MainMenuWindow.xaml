@@ -1,20 +1,16 @@
 ﻿<Window x:Class="RealtyCRMClient.MainMenuWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Главное меню" Height="400" Width="600">
+        Title="Главное меню" Height="500" Width="450">
     <Grid Margin="20">
         <TextBlock x:Name="UserNameText" 
                    Text="{Binding CurrentUser.Name}" 
-                   HorizontalAlignment="Right" 
+                   HorizontalAlignment="Center" 
                    VerticalAlignment="Top" 
-                   Margin="0,0,20,0" 
                    FontSize="16" 
-                   FontWeight="Bold"/>
-        <StackPanel>
-            <!-- Кнопка "Сменить пользователя" -->
-            <Button Content="Сменить пользователя" 
-                    Click="SwitchUser_Click" 
-                    Width="200" Height="40" Margin="0,0,0,10"/>
+                   FontWeight="Bold" Margin="0,0,0,0"/>
+        <StackPanel Margin="0,30,0,0">
+            
 
             <!-- Кнопка "База объектов" -->
             <Button Content="База объектов" 
@@ -31,14 +27,29 @@
                     Click="OpenClients_Click" 
                     Width="200" Height="40" Margin="0,0,0,10"/>
 
+            <!-- Кнопка "Договоры" -->
+            <Button Content="Договоры" 
+                Click="OpenContracts_Click" 
+                Width="200" Height="40" Margin="0,0,0,10"/>
+            
+            <!-- Кнопка "Аналитика" -->
+            <Button Content="Аналитика" 
+                Click="OpenAnalytics_Click" 
+                Width="200" Height="40" Margin="0,0,0,10"/>
+            
             <!-- Кнопка "Документы" -->
             <Button Content="Документы" 
                     Click="OpenDocuments_Click" 
-                    Width="200" Height="40"/>
-            
+                    Width="200" Height="40" Margin="0,0,0,10"/>
+
+            <!-- Кнопка "Сменить пользователя" -->
+            <Button Content="Сменить пользователя" 
+        Click="SwitchUser_Click" 
+        Width="200" Height="40" Margin="0,0,0,10"/>
+
             <Button Content="Выход" 
                     Click="ExitApplication_Click" 
-                    Width="200" Height="40" Margin="0,10,0,0"/>
+                    Width="200" Height="40"/>
         </StackPanel>
     </Grid>
 </Window>

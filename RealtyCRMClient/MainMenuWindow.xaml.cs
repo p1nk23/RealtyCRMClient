@@ -15,6 +15,19 @@ namespace RealtyCRMClient
             DataContext = this;
         }
 
+        //Договоры
+        private void OpenContracts_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new ContractsWindow();
+            window.Show();
+        }
+
+        //Аналитика
+        private void OpenAnalytics_Click(object sender, RoutedEventArgs e)
+        {
+            var analyticsWindow = new AnalyticsWindow();
+            analyticsWindow.Show(); // Или ShowDialog() для модального окна
+        }
 
 
         // Сменить пользователя
@@ -49,7 +62,7 @@ namespace RealtyCRMClient
             this.Close();
         }
 
-        // Открыть Документы (заглушка)
+        // Открыть Документы
         private void OpenDocuments_Click(object sender, RoutedEventArgs e)
         {
             var docsWindow = new DocumentsTemplateWindow();
