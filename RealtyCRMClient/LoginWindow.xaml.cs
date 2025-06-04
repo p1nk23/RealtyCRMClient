@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Serilog;
 
 namespace RealtyCRMClient
 {
@@ -24,9 +25,20 @@ namespace RealtyCRMClient
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private readonly ILogger _logger;
         public LoginWindow()
         {
             InitializeComponent();
+            try
+            {
+                _logger = SerilogConfig.Configure();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка инициализации логирования: {ex.Message}",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw; // Прерываем запуск, чтобы разработчик заметил проблему
+            }
         }
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {

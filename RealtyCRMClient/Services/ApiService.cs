@@ -9,17 +9,123 @@ using RealtyCRMClient.Models;
 using CardObjectRieltyDto = RealtyCRMClient.DTOs.CardObjectRieltyDto;
 using Newtonsoft.Json;
 using System.Text;
+using Serilog;
+using System.Net;
+using RealtyCRMClient.AdminModule.Exceptions;
 
 
 public class ApiService
 {
     private readonly HttpClient _client;
+    private readonly ILogger _logger;
     private const string BaseUrl = "https://localhost:5001/api/";
 
     public ApiService()
     {
         _client = new HttpClient();
     }
+    public ApiService(ILogger logger)
+    {
+        _client = new HttpClient();
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+    public async Task<List<T>> GetAllAsync<T>()
+    {
+        string controllerName = GetControllerName<T>();
+        _logger.Information("Получение всех записей для {ControllerName}", controllerName);
+        try
+        {
+            var response = await _client.GetAsync($"{BaseUrl}{controllerName}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<List<T>>();
+        }
+        catch (HttpRequestException ex)
+        {
+            _logger.Error(ex, "Ошибка при получении записей для {ControllerName}", controllerName);
+            throw new ApiException($"Ошибка связи с сервером: {ex.Message}", (int?)ex.StatusCode ?? 500, ex);
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Неизвестная ошибка при получении записей для {ControllerName}", controllerName);
+            throw new ApiException("Неизвестная ошибка при обработке ответа", 500, ex);
+        }
+    }
+    public async Task DeleteAsync<T>(long id)
+    {
+        string controllerName = GetControllerName<T>();
+        string url = $"{BaseUrl}{controllerName}/{id}";
+        _logger.Information("Отправка DELETE-запроса для {ControllerName} с ID {Id}: {Url}", controllerName, id, url);
+        try
+        {
+            var response = await _client.DeleteAsync(url);
+            if (!response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                _logger.Error("Ошибка при удалении {ControllerName} с ID {Id}. Статус: {StatusCode}, Ответ: {ResponseBody}",
+                    controllerName, id, response.StatusCode, responseBody);
+                string errorMessage = ExtractErrorMessage(responseBody, response.StatusCode);
+                throw new ApiException(errorMessage, (int)response.StatusCode, null);
+            }
+            response.EnsureSuccessStatusCode();
+            _logger.Information("Запись для {ControllerName} с ID {Id} успешно удалена", controllerName, id);
+        }
+        catch (HttpRequestException ex)
+        {
+            _logger.Error(ex, "Ошибка HTTP при удалении записи для {ControllerName} с ID {Id}", controllerName, id);
+            throw new ApiException($"Ошибка при удалении: {ex.Message}", (int?)ex.StatusCode ?? 500, ex);
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Неизвестная ошибка при удалении записи для {ControllerName} с ID {Id}", controllerName, id);
+            throw new ApiException("Неизвестная ошибка при удалении", 500, ex);
+        }
+    }
+    private string GetControllerName<T>()
+    {
+        string controllerName = typeof(T) switch
+        {
+            Type t when t == typeof(ClientDto) => "Client",
+            Type t when t == typeof(ContractDto) => "Contract",
+            Type t when t == typeof(CardObjectRieltyDto) => "CardObjectRielty",
+            Type t when t == typeof(CommentDto) => "Comment",
+            Type t when t == typeof(DocumentTemplateDto) => "DocumentTemplate",
+            Type t when t == typeof(PersonalDto) => "Personal",
+            Type t when t == typeof(TaskObjectDto) => "TaskObject",
+            _ => throw new ArgumentException($"Неизвестный тип DTO: {typeof(T).Name}")
+        };
+        _logger.Information("Определено имя контроллера для типа {Type}: {ControllerName}", typeof(T).Name, controllerName);
+        return controllerName;
+    }
+
+    private string ExtractErrorMessage(string responseBody, HttpStatusCode statusCode)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(responseBody))
+                return $"Сервер вернул ошибку: {statusCode}";
+
+            using var document = JsonDocument.Parse(responseBody);
+            if (document.RootElement.TryGetProperty("message", out var messageElement))
+            {
+                return messageElement.GetString() ?? $"Сервер вернул ошибку: {statusCode}";
+            }
+            if (document.RootElement.TryGetProperty("error", out var errorElement))
+            {
+                return errorElement.GetString() ?? $"Сервер вернул ошибку: {statusCode}";
+            }
+            return responseBody;
+        }
+        catch
+        {
+            return $"Сервер вернул ошибку: {statusCode} - {responseBody}";
+        }
+    }
+
+
+
+
+
+
 
     public async Task<CardObjectRieltyDto> GetCardByClientIdAsync(long personalId)
     {
@@ -255,7 +361,18 @@ public class ApiService
     // Удалить карточку недвижимости
     public async Task DeleteCardAsync(int id)
     {
-        var response = await _client.DeleteAsync($"{BaseUrl}CardObjectRielty/{id}");
-        response.EnsureSuccessStatusCode();
+        try
+        {
+            var response = await _client.DeleteAsync($"{BaseUrl}CardObjectRielty/{id}");
+            response.EnsureSuccessStatusCode();
+        }
+        catch
+        {
+            MessageBox.Show("Перед удалением объекта удалите все связанные с ним сущности");
+        }
     }
+
+
+
+
 }

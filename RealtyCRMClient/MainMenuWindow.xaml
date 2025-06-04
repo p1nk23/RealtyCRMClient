@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RealtyCRMClient.MainMenuWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Главное меню" Height="500" Width="450">
+        Title="Главное меню" Height="550" Width="450">
     <Grid Margin="20">
         <TextBlock x:Name="UserNameText" 
                    Text="{Binding CurrentUser.Name}" 
@@ -40,6 +40,11 @@
             <!-- Кнопка "Документы" -->
             <Button Content="Документы" 
                     Click="OpenDocuments_Click" 
+                    Width="200" Height="40" Margin="0,0,0,10"/>
+
+            <!-- Кнопка "Панель администратора" -->
+            <Button Content="Панель администратора" 
+                    Click="OpenAdminWindow_Click" 
                     Width="200" Height="40" Margin="0,0,0,10"/>
 
             <!-- Кнопка "Сменить пользователя" -->
